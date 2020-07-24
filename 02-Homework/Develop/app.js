@@ -10,75 +10,103 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-function Emmploy(name, role, email, special) {
-    this.name
-    this.role
-    this.email
-    this.special
+let ifDone = false
 
-    this.makeCard = () => {
-
-    }
+function Manager(name, role, email, officeNumber) {
+    this.name = name
+    this.role = role
+    this.email = email
+    this.officeNumber = officeNumber
 }
-
+function Engineer(name, role, email, github) {
+    this.name = name
+    this.role = role
+    this.email = email
+    this.github = github
+}
+function Intern(name, role, email, school) {
+    this.name = name
+    this.role = role
+    this.email = email
+    this.school = school
+}
 
 const ackQuestions = () => {
-    return inquirer.prompt([
-        {
-            type: "list",
-            name: "role",
-            message: "What role do you need?",
-            choices: ["Manager", "Engineer", "Intern", "I don't need more."]
-        },
-        {
-            type: "input",
-            name: "name",
-            message: "What is their name?"
-        },
-        {
-            type: "input",
-            name: "email",
-            message: "What is their email?"
-        },
+    while (done == ! true) {
 
-    ])
-        .then((answers) => {
-            switch (answers.role) {
-                case "Manager":
-                    return inquirer.prompt([
-                        {
-                            type: "input",
-                            name: "officeNumber",
-                            message: "What is their office number?"
-                        },
-                    ])
-                    break;
-                case "Engineer":
-                    return inquirer.prompt([
-                        {
-                            type: "input",
-                            name: "github",
-                            message: "What is their github username?"
-                        },
-                    ])
-                    break;
-                case "Intern":
-                    return inquirer.prompt([
-                        {
-                            type: "input",
-                            name: "school",
-                            message: "Where is their school?"
-                        },
-                    ])
-                    break;
-                default:
-                    break;
-            }
-        })
+        return inquirer.prompt([
+            {
+                type: "list",
+                name: "role",
+                message: "What role do you need?",
+                choices: ["Manager", "Engineer", "Intern", "I don't need more."]
+            },
+            {
+                type: "input",
+                name: "name",
+                message: "What is their name?"
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is their email?"
+            },
+
+        ])
+            .then((answers) => {
+                switch (answers.role) {
+                    case "Manager":
+                        return inquirer.prompt([
+                            {
+                                type: "input",
+                                name: "officeNumber",
+                                message: "What is their office number?"
+                            },
+                        ]).then(answers); {
+                            const newEmmployee = new Manager(answers.name, answers.role, answers.email, answers.officeNumber);
+                        }
+                        break;
+                    case "Engineer":
+                        return inquirer.prompt([
+                            {
+                                type: "input",
+                                name: "github",
+                                message: "What is their github username?"
+                            },
+                        ]).then(answers); {
+                            const newEmmployee = new Manager(answers.name, answers.role, answers.email, answers.);
+                        }
+                        break;
+                    case "Intern":
+                        return inquirer.prompt([
+                            {
+                                type: "input",
+                                name: "school",
+                                message: "Where is their school?"
+                            },
+                        ])
+
+                        break;
+                    default:
+                        done = true
+                        break;
+                }
+            })
+    }
+
+    const newManager = new Manager(answers.name, answers.role, answers.email, answers.officeNumber);
+}
+
+
+function writeToFile(answers) {
+    Emmploy(answers.name, answers.role, answers.email, answers)
 }
 
 
 
+
+
+render()
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
